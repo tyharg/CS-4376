@@ -1,0 +1,2 @@
+module UrlEntriesHelper
+end

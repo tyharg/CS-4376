@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @url_entry %>
+
+<div>
+  <%= link_to "Edit this url entry", edit_url_entry_path(@url_entry) %> |
+  <%= link_to "Back to url entries", url_entries_path %>
+
+  <%= button_to "Destroy this url entry", @url_entry, method: :delete %>
+</div>

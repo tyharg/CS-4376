@@ -1,0 +1,111 @@
+class UrlEntriesController < ApplicationController
+  before_action :set_url_entry, only: %i[ show edit update destroy ]
+
+  # GET /url_entries or /url_entries.json
+  def index
+    @url_entries = UrlEntry.all
+  end
+
+  # GET /url_entries/1 or /url_entries/1.json
+  def show
+  end
+
+  def search
+    keywords = params[:query].split(' ')
+    query_type = params[:query_type]
+
+    if query_type == 'AND'
+      @url_entries = perform_and_search(keywords)
+    elsif query_type == 'NOT'
+      @url_entries = perform_not_search(keywords)
+    else
+      @url_entries = perform_or_search(keywords)
+    end
+
+  end
+
+  # GET /url_entries/new
+  def new
+    @url_entry = UrlEntry.new
+  end
+
+  # GET /url_entries/1/edit
+  def edit
+  end
+
+  # POST /url_entries or /url_entries.json
+  def create
+    @url_entry = UrlEntry.new(url_entry_params)
+
+    respond_to do |format|
+      if @url_entry.save
+        format.html { redirect_to url_entry_url(@url_entry), notice: "Url entry was successfully created." }
+        format.json { render :show, status: :created, location: @url_entry }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @url_entry.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /url_entries/1 or /url_entries/1.json
+  def update
+    respond_to do |format|
+      if @url_entry.update(url_entry_params)
+        format.html { redirect_to url_entry_url(@url_entry), notice: "Url entry was successfully updated." }
+        format.json { render :show, status: :ok, location: @url_entry }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @url_entry.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /url_entries/1 or /url_entries/1.json
+  def destroy
+    @url_entry.destroy
+
+    respond_to do |format|
+      format.html { redirect_to url_entries_url, notice: "Url entry was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_url_entry
+      @url_entry = UrlEntry.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def url_entry_params
+      params.require(:url_entry).permit(:url, :description, :expire)
+    end
+
+    private
+
+    def perform_or_search(keywords)
+      UrlEntry.where('description LIKE ?', "%#{keywords.first}%").tap do |query|
+        keywords.drop(1).each do |keyword|
+          query.or!(UrlEntry.where('description LIKE ?', "%#{keyword}%"))
+        end
+      end
+    end
+  
+    def perform_and_search(keywords)
+      UrlEntry.where('description LIKE ?', "%#{keywords.first}%").tap do |query|
+        keywords.drop(1).each do |keyword|
+          query.where!('description LIKE ?', "%#{keyword}%")
+        end
+      end
+    end
+  
+    def perform_not_search(keywords)
+      UrlEntry.where.not('description LIKE ?', "%#{keywords.first}%").tap do |query|
+        keywords.drop(1).each do |keyword|
+          query.where.not('description LIKE ?', "%#{keyword}%")
+        end
+      end
+    end
+
+end
