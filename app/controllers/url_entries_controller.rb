@@ -51,12 +51,15 @@ class UrlEntriesController < ApplicationController
   def create
     @url_entry = UrlEntry.new(url_entry_params)
 
+    
     respond_to do |format|
-      if @url_entry.save
+      if valid_url?(@url_entry.url) && @url_entry.save
         format.html { redirect_to url_entry_url(@url_entry), notice: "Url entry was successfully created." }
         format.json { render :show, status: :created, location: @url_entry }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        @url_entry.errors.add(:url, message: "Failed to create URL Entry.")
+
+        format.html { render :new, status: :unprocessable_entity}
         format.json { render json: @url_entry.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +68,7 @@ class UrlEntriesController < ApplicationController
   # PATCH/PUT /url_entries/1 or /url_entries/1.json
   def update
     respond_to do |format|
-      if @url_entry.update(url_entry_params)
+      if valid_url?(@url_entry.url) && @url_entry.update(url_entry_params)
         format.html { redirect_to url_entry_url(@url_entry), notice: "Url entry was successfully updated." }
         format.json { render :show, status: :ok, location: @url_entry }
       else
@@ -97,6 +100,13 @@ class UrlEntriesController < ApplicationController
     end
 
     private
+
+    def valid_url?(url)
+      uri = URI.parse(url)
+      uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+    rescue URI::InvalidURIError
+      false
+    end
 
     def perform_or_search(keywords)
       UrlEntry.where('description LIKE ?', "%#{keywords.first}%").tap do |query|
