@@ -23,10 +23,10 @@ class UrlEntriesController < ApplicationController
       @url_entries = perform_or_search(keywords)
     end
 
-    if sort_order == "1"
+    if sort_order == "counter"
       @url_entries = @url_entries.order(counter: :desc)
     end
-    if sort_order == "2"
+    if sort_order == "description"
       @url_entries = @url_entries.order(:description)
     end
     
@@ -57,7 +57,7 @@ class UrlEntriesController < ApplicationController
         format.html { redirect_to url_entry_url(@url_entry), notice: "Url entry was successfully created." }
         format.json { render :show, status: :created, location: @url_entry }
       else
-        @url_entry.errors.add(:url, message: "Failed to create URL Entry.")
+        @url_entry.errors.add(:url, message: "Failed to create URL Entry: check URL formatting")
 
         format.html { render :new, status: :unprocessable_entity}
         format.json { render json: @url_entry.errors, status: :unprocessable_entity }
