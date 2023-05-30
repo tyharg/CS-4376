@@ -4,15 +4,7 @@
 
 <%= render 'search_form' %>
 
-<div id="url_entries">
-  <% @url_entries.each do |url_entry| %>
-    <div style="border-style:solid;border-width:3px; border-radius:5px; border-color: #222222; margin: 10px;"> 
-    <%= render url_entry %>
-    <p>
-      <%= link_to "Show this url entry", url_entry %>
-    </p>
-  </div>
-  <% end %>
-</div>
+<%= render 'list_entry' %>
+
 
 <%= link_to "New url entry", new_url_entry_path %>

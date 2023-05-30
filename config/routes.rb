@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "url_entries#index"
   get 'search/' => 'url_entries#search', :as => :search
+  get 'visit/:id' => 'url_entries#visit', :as => :visit
 end

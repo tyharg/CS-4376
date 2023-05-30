@@ -1,13 +1,19 @@
 <div id="<%= dom_id url_entry %>">
   <p>
     <strong>Url:</strong>
-    <a href="<%= url_entry.url %>" target="_blank"> <%= url_entry.url %> </a>
+    <%= link_to "#{url_entry.url}", visit_path(url_entry), target: "_blank"%>
   </p>
 
   <p>
     <strong>Description:</strong>
     <%= url_entry.description %>
   </p>
+
+  <p>
+    <strong>Clicks:</strong>
+    <%= url_entry.counter %>
+  </p>
+
 
   <p>
     <strong>Expire:</strong>

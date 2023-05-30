@@ -13,6 +13,7 @@ class UrlEntriesController < ApplicationController
   def search
     keywords = params[:query].split(' ')
     query_type = params[:query_type]
+    sort_order = params[:sort_order]
 
     if query_type == 'AND'
       @url_entries = perform_and_search(keywords)
@@ -22,6 +23,19 @@ class UrlEntriesController < ApplicationController
       @url_entries = perform_or_search(keywords)
     end
 
+    if sort_order == "1"
+      @url_entries = @url_entries.order(counter: :desc)
+    end
+    if sort_order == "2"
+      @url_entries = @url_entries.order(:description)
+    end
+    
+  end
+
+  def visit
+    @url_entry = UrlEntry.find(params[:id])
+    @url_entry.increment
+    redirect_to(@url_entry.url, allow_other_host: true)
   end
 
   # GET /url_entries/new
