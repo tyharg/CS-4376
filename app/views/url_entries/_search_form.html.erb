@@ -1,4 +1,10 @@
-
+<style>
+    #query {
+        margin: 7px;
+        width: 600px;
+        height: 40px;
+    }
+</style>
 <%= form_with url: "/search", method: :get do |form| %>
     <%= form.label :query, "Search for:" %>
     <%= form.text_field :query %>
