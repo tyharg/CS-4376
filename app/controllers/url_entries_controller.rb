@@ -30,6 +30,7 @@ class UrlEntriesController < ApplicationController
       @url_entries = @url_entries.order(:description)
     end
     
+    
   end
 
   def visit
