@@ -6,8 +6,12 @@
   <% @settings.each do |setting| %>
     <%= render setting %>
     <p>
-      <%= link_to "Show this setting", setting %>
+      <%= link_to "Update Settings", setting %>
     </p>
+
+    <p onclick="window.confirm('This will remove all expired links from the index, are you sure?')">
+    <%= link_to "Purge Expired Links", purge_path %>
+  </p>
   <% end %>
 </div>
 

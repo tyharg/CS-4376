@@ -11,7 +11,7 @@ class UrlEntriesController < ApplicationController
   end
 
   def search
-    keywords = params[:query].split(' ')
+    keywords = settings_filter_chars(params[:query].split(' '))
     query_type = params[:query_type]
     sort_order = params[:sort_order]
 
@@ -91,7 +91,7 @@ class UrlEntriesController < ApplicationController
 
   private
 
-    def settings_filter_chars
+    def settings_filter_chars(keywords)
       keywords = keywords.map { |keyword|
         Setting.first.filter_chars_array.each {|char|
           keyword = keyword.delete(char)

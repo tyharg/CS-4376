@@ -1,10 +1,11 @@
-Rails.application.routes.draw do
-  resources :settings
-  resources :url_entries
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
+Rails.application.routes.draw do
+  get 'settings/purge' => 'settings#purge', :as => :purge
   root "url_entries#index"
   get 'search/' => 'url_entries#search', :as => :search
   get 'visit/:id' => 'url_entries#visit', :as => :visit
+
+  resources :settings
+  resources :url_entries
+
 end

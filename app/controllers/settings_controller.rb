@@ -57,6 +57,10 @@ class SettingsController < ApplicationController
     end
   end
 
+  def purge
+    UrlEntry.active.where("expire < ?", DateTime.now).update(archived: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
