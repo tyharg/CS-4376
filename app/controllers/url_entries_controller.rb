@@ -3,7 +3,7 @@ class UrlEntriesController < ApplicationController
 
   # GET /url_entries or /url_entries.json
   def index
-    @url_entries = UrlEntry.all
+    @url_entries = UrlEntry.all.active
   end
 
   # GET /url_entries/1 or /url_entries/1.json
@@ -30,7 +30,7 @@ class UrlEntriesController < ApplicationController
       @url_entries = @url_entries.order(:description)
     end
     
-    
+      @url_entries.active
   end
 
   def visit
@@ -90,6 +90,17 @@ class UrlEntriesController < ApplicationController
   end
 
   private
+
+    def settings_filter_chars
+      keywords = keywords.map { |keyword|
+        Setting.first.filter_chars_array.each {|char|
+          keyword = keyword.delete(char)
+        }
+        keyword
+      }
+      keywords = keywords.reject { |key| key.empty? }
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_url_entry
       @url_entry = UrlEntry.find(params[:id])

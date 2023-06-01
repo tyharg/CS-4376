@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_235530) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_051808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "settings", force: :cascade do |t|
+    t.string "filter_chars"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "url_entries", force: :cascade do |t|
     t.string "url"
@@ -21,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_235530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "counter", default: 0
+    t.boolean "archived", default: false
   end
 
 end
