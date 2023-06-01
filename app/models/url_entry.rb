@@ -1,7 +1,7 @@
 class UrlEntry < ApplicationRecord
 
     scope :active, -> { where(archived: false) }
-    scope :sponsored_first, -> { where(sponsored:true).or(where(sponsored:false))}
+    scope :sponsored_first, -> { where(sponsored:true).or(where(sponsored:false)).order(sponsored: :desc)}
 
 
     def increment

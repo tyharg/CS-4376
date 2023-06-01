@@ -3,7 +3,7 @@ class UrlEntriesController < ApplicationController
 
   # GET /url_entries or /url_entries.json
   def index
-    @url_entries = UrlEntry.all.active.order(counter: :desc).sponsored_first
+    @url_entries = UrlEntry.all.active.sponsored_first
     if(params[:page] == 'all')
       @url_entries = @url_entries.page(1).per(@url_entries.count)
     else
@@ -29,10 +29,10 @@ class UrlEntriesController < ApplicationController
     end
 
     if sort_order == "counter"
-      @url_entries = @url_entries.order(counter: :desc).order(sponsored: :desc)
+      @url_entries = @url_entries.order(counter: :desc)
     end
     if sort_order == "description"
-      @url_entries = @url_entries.order(:description).order(sponsored: :desc)
+      @url_entries = @url_entries.order(:description)
     end
 
     @url_entries = @url_entries.active.sponsored_first
