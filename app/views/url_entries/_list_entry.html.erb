@@ -8,4 +8,13 @@
     </div>
     
   <% end %>
+
+  
+  <%= link_to_previous_page @url_entries, 'Previous Page' %>
+  |
+  <%= link_to_next_page @url_entries, 'Next Page' %>
+
+  <%= page_entries_info @url_entries, entry_name: 'URL' %>
+  
+
 </div>

@@ -4,6 +4,11 @@ class UrlEntriesController < ApplicationController
   # GET /url_entries or /url_entries.json
   def index
     @url_entries = UrlEntry.all.active.order(counter: :desc).sponsored_first
+    if(params[:page] == 'all')
+      @url_entries = @url_entries.page(1).per(@url_entries.count)
+    else
+      @url_entries = @url_entries.page(params[:page]).per(3)
+    end
   end
 
   # GET /url_entries/1 or /url_entries/1.json
@@ -31,6 +36,12 @@ class UrlEntriesController < ApplicationController
     end
 
     @url_entries = @url_entries.active.sponsored_first
+
+    if(params[:page] == 'all')
+      @url_entries = @url_entries.page(1).per(@url_entries.count)
+    else
+      @url_entries = @url_entries.page(params[:page]).per(3)
+    end
     
     respond_to do |format|
       format.html { @url_entries}

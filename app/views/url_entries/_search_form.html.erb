@@ -11,13 +11,16 @@
     <%= form.label :query, "Search for:" %>
     <%= form.text_field :query, id: "autoComplete", autocomplete: "off", style: "color: #222222", value: params[:query] %>
     </br>
+    </br>
 
     <%= form.label :query_type, "Query Type:" %>
-    <%= form.select :query_type, ['OR', 'AND', 'NOT']%>
+    <%= form.select :query_type, ['OR', 'AND', 'NOT'], selected: params[:query_type]%>
+    </br>
     </br>
 
     <%= form.label :sort_order, "Sort Order:" %>
-    <%= form.select :sort_order, options_for_select([['Most Accessed', 'counter'], ['Alphabetical', 'description']])%>
+    <%= form.select :sort_order, options_for_select([['Most Accessed', 'counter'], ['Alphabetical', 'description']], selected: params[:sort_order])%>
+    </br>
     </br>
 
 

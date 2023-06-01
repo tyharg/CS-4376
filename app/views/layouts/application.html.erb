@@ -28,7 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
     <script>
 
-    fetch('/url_entries.json')
+    fetch('/url_entries.json?page=all')
     .then(response => response.json())
     .then(data => {
       const descriptions = data.map(entry => entry.description);
