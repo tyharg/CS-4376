@@ -23,6 +23,11 @@
     </br>
     </br>
 
+    <%= form.label :per_page, "Items Per Page:" %>
+    <%= form.select :per_page, options_for_select([3, 5, 10, 20, 50], selected: params[:per_page])%>
+    </br>
+    </br>
+
 
     <%= form.submit "Search" %>
   <% end %>

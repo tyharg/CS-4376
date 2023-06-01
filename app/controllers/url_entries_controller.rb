@@ -40,7 +40,8 @@ class UrlEntriesController < ApplicationController
     if(params[:page] == 'all')
       @url_entries = @url_entries.page(1).per(@url_entries.count)
     else
-      @url_entries = @url_entries.page(params[:page]).per(3)
+      per_page = params[:per_page] || 3
+      @url_entries = @url_entries.page(params[:page]).per(per_page)
     end
     
     respond_to do |format|
