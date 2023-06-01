@@ -3,7 +3,7 @@ class UrlEntriesController < ApplicationController
 
   # GET /url_entries or /url_entries.json
   def index
-    @url_entries = UrlEntry.all.active
+    @url_entries = UrlEntry.all.active.order(sponsored: :desc)
   end
 
   # GET /url_entries/1 or /url_entries/1.json
@@ -24,15 +24,17 @@ class UrlEntriesController < ApplicationController
     end
 
     if sort_order == "counter"
-      @url_entries = @url_entries.order(counter: :desc)
+      @url_entries = @url_entries.order(counter: :desc).order(sponsored: :desc)
     end
     if sort_order == "description"
-      @url_entries = @url_entries.order(:description)
+      @url_entries = @url_entries.order(:description).order(sponsored: :desc)
     end
+
+    @url_entries = @url_entries.active.sponsored_first
     
     respond_to do |format|
-      format.html { @url_entries.active }
-      format.json { render json: @url_entries.active }
+      format.html { @url_entries}
+      format.json { render json: @url_entries }
     end
 
   end
@@ -112,7 +114,7 @@ class UrlEntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def url_entry_params
-      params.require(:url_entry).permit(:url, :description, :expire)
+      params.require(:url_entry).permit(:url, :description, :expire, :sponsored)
     end
 
     private

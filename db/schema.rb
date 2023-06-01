@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_051808) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_151735) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "settings", force: :cascade do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_051808) do
     t.datetime "updated_at", null: false
     t.integer "counter", default: 0
     t.boolean "archived", default: false
+    t.boolean "sponsored", default: false
   end
 
 end
