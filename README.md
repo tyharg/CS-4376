@@ -1,7 +1,7 @@
 # CS-4376
 
 
-Preliminary Project Plan: 
+Preliminary Project Plan: https://github.com/tyharg/CS-4376/blob/main/preliminary-plan.pdf
 
 * Ruby version
 
