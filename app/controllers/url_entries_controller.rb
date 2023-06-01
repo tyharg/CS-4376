@@ -85,8 +85,8 @@ class UrlEntriesController < ApplicationController
 
   # DELETE /url_entries/1 or /url_entries/1.json
   def destroy
-    @url_entry.destroy
 
+    @url_entry.update(archived:true)
     respond_to do |format|
       format.html { redirect_to url_entries_url, notice: "Url entry was successfully destroyed." }
       format.json { head :no_content }
