@@ -3,7 +3,7 @@ class UrlEntriesController < ApplicationController
 
   # GET /url_entries or /url_entries.json
   def index
-    @url_entries = UrlEntry.all.active.order(sponsored: :desc)
+    @url_entries = UrlEntry.all.active.order(counter: :desc).sponsored_first
   end
 
   # GET /url_entries/1 or /url_entries/1.json
