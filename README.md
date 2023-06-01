@@ -1,5 +1,6 @@
 # CS-4376
 
+Demo: https://cs-4376-cyberminer.herokuapp.com/
 
 Preliminary Project Plan: https://github.com/tyharg/CS-4376/blob/main/preliminary-plan.pdf
 
