@@ -9,7 +9,7 @@
 </style>
 <%= form_with url: "/search", method: :get do |form| %>
     <%= form.label :query, "Search for:" %>
-    <%= form.text_field :query, id: "autoComplete", autocomplete: "off" %>
+    <%= form.text_field :query, id: "autoComplete", autocomplete: "off", style: "color: #222222", value: params[:query] %>
     </br>
 
     <%= form.label :query_type, "Query Type:" %>
