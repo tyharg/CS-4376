@@ -30,7 +30,11 @@ class UrlEntriesController < ApplicationController
       @url_entries = @url_entries.order(:description)
     end
     
-      @url_entries.active
+    respond_to do |format|
+      format.html { @url_entries.active }
+      format.json { render json: @url_entries.active }
+    end
+
   end
 
   def visit
