@@ -48,14 +48,14 @@ class SettingsController < ApplicationController
   end
 
   # DELETE /settings/1 or /settings/1.json
-  def destroy
-    @setting.destroy
+  # def destroy
+  #   @setting.destroy
 
-    respond_to do |format|
-      format.html { redirect_to settings_url, notice: "Setting was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to settings_url, notice: "Setting was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   def purge
     UrlEntry.active.where("expire < ?", DateTime.now).update(archived: true)
