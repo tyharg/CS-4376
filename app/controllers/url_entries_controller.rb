@@ -129,8 +129,6 @@ class UrlEntriesController < ApplicationController
       params.require(:url_entry).permit(:url, :description, :expire, :sponsored)
     end
 
-    private
-
     def valid_url?(url)
       uri = URI.parse(url)
       uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
