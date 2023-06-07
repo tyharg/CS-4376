@@ -1,5 +1,7 @@
 class UrlEntriesController < ApplicationController
   before_action :set_url_entry, only: %i[ show edit update destroy ]
+  @url_entry
+  @url_entries
 
   # GET /url_entries or /url_entries.json
   def index
