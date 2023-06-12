@@ -11,14 +11,15 @@ Preliminary Project Plan: https://github.com/tyharg/CS-4376/blob/main/preliminar
 ![image](https://github.com/tyharg/CS-4376/assets/2886930/b756b998-a1cb-4c6e-9924-8f06fa93627e)
 
 
+## Additional
 
 * Ruby version
 
-3.1.2
+`3.1.2`
 
 * System dependencies
 
-Postgres
+`Postgres`
 
 * How to run the test suite
 
@@ -26,7 +27,7 @@ Postgres
 
 * Services (job queues, cache servers, search engines, etc.)
 
-N/A
+`N/A`
 
 
 * ...
