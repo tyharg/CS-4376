@@ -2,8 +2,10 @@
 
 <%= render @url_entry %>
 
+<% if user_signed_in? && current_user.is_admin? %>
 <div>
   <%= link_to "Back to url entries", root_path %> |
   <%= link_to "Edit this url entry", edit_url_entry_path(@url_entry) %> |
   <%= button_to "Destroy this url entry", @url_entry, method: :delete, :onclick => "return confirm('This will delete this link, are you sure?')" %>
 </div>
+<% end %>

@@ -1,5 +1,6 @@
 class UrlEntriesController < ApplicationController
   before_action :set_url_entry, only: %i[ show edit update destroy ]
+  before_action :is_admin, only: %i[ create edit update destroy ]
   @url_entry
   @url_entries
 

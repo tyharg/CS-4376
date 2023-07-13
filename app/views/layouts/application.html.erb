@@ -16,9 +16,19 @@
 
   <body style="padding:10px;background-color: #222222;color: #ffffff;">
   <div id="topbar" style="background-color:#333333;border-style:solid;border-radius:10px;border-width:2px;padding:25px;border-color:#dddddd;">
+  <% if user_signed_in? %> 
+  <div> Welcome <%= current_user.email %> </div> 
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <% else %>
+    <div> Test admin credentials: tth150630@utdallas.edu : password123 </div>
+    <%= button_to "Sign in", new_user_session_path %> 
+  <% end %>  
+  </br> 
     <%= link_to "Home", root_path %> |
+    <% if user_signed_in? && current_user.is_admin? %> 
     <%= link_to "New url entry", new_url_entry_path %> |
     <%= link_to "Settings", settings_path %> |
+    <% end %>
     <a href="https://github.com/tyharg/CS-4376/" target="_blank">  Readme</a> |
     <a href="https://github.com/tyharg/CS-4376/blob/2ab0b974cd5e019239cbc5d3168ddb5ae67b128f/preliminary-plan.pdf" target="_blank"> Preliminary Project Plan </a>
   </div>
@@ -27,6 +37,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
     <script>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     fetch('/url_entries.json?page=all')
     .then(response => response.json())
